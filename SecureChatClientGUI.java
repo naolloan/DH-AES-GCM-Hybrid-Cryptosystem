@@ -42,7 +42,7 @@ public class SecureChatClientGUI extends JFrame {
         setVisible(true);
     }
 
-    /* CONNECTION + DH + AES */
+    // CONNECTION + DH + AES 
     private void setupConnection() throws Exception {
         Socket socket = new Socket(InetAddress.getLocalHost(), 1234);
 
@@ -70,7 +70,7 @@ public class SecureChatClientGUI extends JFrame {
         chatArea.append("🔐 Secure session established\n");
     }
 
-    /* GUI ACTIONS */
+    // GUI ACTIONS
     private void setupActions() {
         sendButton.addActionListener(e -> sendMessage());
         inputField.addActionListener(e -> sendMessage());
@@ -93,7 +93,7 @@ public class SecureChatClientGUI extends JFrame {
         }
     }
 
-    /* BACKGROUND LISTENER */
+    // BACKGROUND LISTENER 
     private void startListenerThread() {
         new Thread(() -> {
             try {
@@ -109,7 +109,7 @@ public class SecureChatClientGUI extends JFrame {
         }).start();
     }
 
-    /* ENCRYPTION HELPERS */
+    // ENCRYPTION HELPERS 
     private void sendEncrypted(String msg) throws Exception {
         Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
 
