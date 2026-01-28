@@ -20,9 +20,7 @@ public class TCPServer {
         DataInputStream in = new DataInputStream(socket.getInputStream());
         DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 
-        /* =======================
-           DIFFIE–HELLMAN SETUP
-           ======================= */
+        // DIFFIE–HELLMAN SETU
 
         BigInteger p = new BigInteger(in.readUTF());
         BigInteger g = new BigInteger(in.readUTF());
@@ -36,9 +34,7 @@ public class TCPServer {
 
         BigInteger sharedSecret = A.modPow(b, p);
 
-        /* =======================
-           DERIVE AES KEY
-           ======================= */
+        // DERIVE AES KEY
 
         MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
         byte[] keyBytes = sha256.digest(sharedSecret.toByteArray());
@@ -47,9 +43,7 @@ public class TCPServer {
         System.out.println("Secure session established.\n");
         
 
-        /* =======================
-           ENCRYPTED CHAT
-           ======================= */
+        // ENCRYPTED CHAT
 
         while (true) {
             String message = receiveEncrypted(in, aesKey);
@@ -66,7 +60,7 @@ public class TCPServer {
         serverSocket.close();
     }
 
-    /* ---------- Encryption ---------- */
+    // Encryption
 
     private static void sendEncrypted(DataOutputStream out, SecretKey key, String msg) throws Exception {
         Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
